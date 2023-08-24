@@ -92,6 +92,14 @@ function customKeyboard(zone, input, onClick, onESC, onEnter, form) {
                     key.classList.add("spacebar");
                 }
 
+                if (form[Object.keys(form)[index]][i][j] == "." ||
+                    form[Object.keys(form)[index]][i][j] == "," ||
+                    form[Object.keys(form)[index]][i][j] == "?" ||
+                    form[Object.keys(form)[index]][i][j] == "!" ||
+                    form[Object.keys(form)[index]][i][j] == "'") {
+                    key.classList.add("long-width");
+                }
+
                 key.innerHTML = "<keyboard-text>" + form[Object.keys(form)[index]][i][j] + "</keyboard-text>";
                 key.addEventListener("click", keyfun)
                 keyline.appendChild(key);

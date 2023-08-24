@@ -83,6 +83,10 @@ keyboard-text {
     width: 365px;
 }
 
+.long-width {
+    width: 62px;
+}
+
 keyboard-move {
     position: absolute;
     width: 100%;
