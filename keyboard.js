@@ -1,11 +1,4 @@
 function customKeyboard(zone, input, onClick, onESC, onEnter, form) {
-    /*
-        zone : 생성될 위치
-        input : 입력할 변수
-        onClick : 키보드가 눌렸을때 동작
-        onESC : 뒤로 눌렸을때 동작
-        form : 키보드의 모습
-    */
     var nowlang = "koNormal";
     this.setClick = function(newclick) {
         onClick = newclick;
