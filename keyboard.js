@@ -61,6 +61,7 @@ function customKeyboard(zone, input, onClick, onEnter) {
     }
 
     let keydiv = {};
+
     Object.keys(form).forEach(key => {
         keydiv[key] = document.createElement("keyboard-layout");
         keydiv[key].classList.add("disable");
@@ -133,5 +134,10 @@ function customKeyboard(zone, input, onClick, onEnter) {
         if (onClick) {
             onClick(getText());
         }
+
+
+        const feedback = document.getElementById("typing_feedback");
+        feedback.src = "./res/Typing.mp3";
+        feedback.play();
     }
 }
