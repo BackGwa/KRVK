@@ -10,7 +10,6 @@ const keyboard = new customKeyboard(
         keyboardzone,
         input,  /* 입력 대상 */
         null,   /* 입력 시 이벤트 */
-        null,
         null,   /* 엔터 클릭 시 이벤트 */
         null
 );

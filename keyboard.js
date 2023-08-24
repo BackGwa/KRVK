@@ -1,4 +1,4 @@
-function customKeyboard(zone, input, onClick, onESC, onEnter, form) {
+function customKeyboard(zone, input, onClick, onEnter, form) {
     let nowlang = "koNormal";
     let charlist = [];
 
