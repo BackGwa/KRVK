@@ -63,90 +63,64 @@ function customKeyboard(zone, input, onClick, onESC, onEnter, form) {
     }
 
     let keydiv = {};
-    for (let index = 0; index < Object.keys(form).length; index++) {
-        keydiv[Object.keys(form)[index]] = document.createElement("keyboard-layout")
-        keydiv[Object.keys(form)[index]].classList.add("disable");
+    Object.keys(form).forEach(key => {
+        keydiv[key] = document.createElement("keyboard-layout");
+        keydiv[key].classList.add("disable");
 
-        for (let i = 0; i < form[Object.keys(form)[index]].length; i++) {
-            var keyline = document.createElement("table");
-            for (let j = 0; j < form[Object.keys(form)[index]][i].length; j++) {
-                var key = document.createElement("th")
-                const keySymbol = form[Object.keys(form)[index]][i][j];
+        form[key].forEach(line => {
+            const keyline = document.createElement("table");
+            line.forEach(keySymbol => {
+                const key = document.createElement("th");
+                const classNames = [];
 
                 if (keySymbol === "↩") {
-                    key.classList.add("highlight");
+                    classNames.push("highlight");
                 } else if (keySymbol === "⌫" || keySymbol === "⮸") {
-                    key.classList.add("function");
+                    classNames.push("function");
                 } else if (keySymbol === "") {
-                    key.classList.add("spacebar");
+                    classNames.push("spacebar");
                 } else if ([".", ",", "?", "!", "'"].includes(keySymbol)) {
-                    key.classList.add("long-width");
-                }                
+                    classNames.push("long-width");
+                }
 
-                key.innerHTML = "<keyboard-text>" + form[Object.keys(form)[index]][i][j] + "</keyboard-text>";
-                key.addEventListener("click", keyfun)
+                key.innerHTML = `<keyboard-text>${keySymbol}</keyboard-text>`;
+                key.classList.add(...classNames);
+                key.addEventListener("click", keyfun);
                 keyline.appendChild(key);
-            }
-            keydiv[Object.keys(form)[index]].appendChild(keyline);
-        }
-        zone.appendChild(keydiv[Object.keys(form)[index]])
-    }
+            });
+
+            keydiv[key].appendChild(keyline);
+        });
+
+        zone.appendChild(keydiv[key]);
+    });
+
     keydiv[nowlang].style.visibility = "visible";
+
     function keyfun() {
-        if(this.innerText == '↩') {
+        if (this.innerText === "↩") {
             onEnter(getText());
-            return
-        } else if(this.innerText == '🌐') {
+        } else if (this.innerText === "🌐") {
             keydiv[nowlang].style.visibility = "hidden";
-            if(nowlang == "koNormal") {
-                nowlang = "enNormal"
-            }
-            
-            else if(nowlang == "enNormal") {
-                nowlang = "symbolNormal"
-            }
-
-            else if(nowlang == "symbolNormal") {
-                nowlang = "koNormal"
-            }
-            
-            else if(nowlang == "koShift") {
-                nowlang = "enShift"
-            }
-
-            else if(nowlang == "enShift") {
-                nowlang = "symbolShift"
-            }
-
-            else if(nowlang == "symbolShift") {
-                nowlang = "koShift"
-            }
+            nowlang = (nowlang === "koNormal") ? "enNormal" :
+                      (nowlang === "enNormal") ? "symbolNormal" :
+                      (nowlang === "symbolNormal") ? "koNormal" :
+                      (nowlang === "koShift") ? "enShift" :
+                      (nowlang === "enShift") ? "symbolShift" :
+                      (nowlang === "symbolShift") ? "koShift" : "koNormal";
 
             keydiv[nowlang].style.visibility = "visible";
-            return
-        }
-        else if(this.innerText == '⮸') {
+        } else if (this.innerText === "⮸") {
             keydiv[nowlang].style.visibility = "hidden";
-            if(nowlang == "koNormal") {
-                nowlang = "koShift"
-            }
-            else if(nowlang == "enNormal") {
-                nowlang = "enShift"
-            }
-            else if(nowlang == "koShift") {
-                nowlang = "koNormal"
-            }
-            else if(nowlang == "enShift") {
-                nowlang = "enNormal"
-            }
-            else if(nowlang == "symbolShift") {
-                nowlang = "symbolNormal"
-            }
-            else if(nowlang == "symbolNormal") {
-                nowlang = "symbolShift"
-            }
+            
+            nowlang = (nowlang === "koNormal" || nowlang === "enNormal") ? 
+                      (nowlang === "koNormal") ? "koShift" : "enShift" :
+                      (nowlang === "koShift" || nowlang === "enShift") ?
+                      (nowlang === "koShift") ? "koNormal" : "enNormal" :
+                      (nowlang === "symbolShift" || nowlang === "symbolNormal") ?
+                      (nowlang === "symbolShift") ? "symbolNormal" : "symbolShift" : nowlang;
+
             keydiv[nowlang].style.visibility = "visible";
-            return
         } else if (this.innerText === "⌫") {
             charlist.pop();
         } else if (this.innerText === "") {
@@ -155,11 +129,11 @@ function customKeyboard(zone, input, onClick, onESC, onEnter, form) {
             charlist.push(this.innerText);
         }
         
-        text = Hangul.assemble(charlist)
+        const text = Hangul.assemble(charlist);
         input.value = text;
-        if(onClick != null) {
+
+        if (onClick) {
             onClick(getText());
         }
     }
-
 }
