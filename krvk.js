@@ -11,7 +11,6 @@ const keyboard = new customKeyboard(
         input,  /* 입력 대상 */
         null,   /* 입력 시 이벤트 */
         null,   /* 엔터 클릭 시 이벤트 */
-        null
 );
 
 let is_move = false;
