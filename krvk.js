@@ -16,43 +16,38 @@ const keyboard = new customKeyboard(
 );
 
 let is_move = false;
+let pageX = 0;
+let pageY = 0;
 
-/* 키보드 움직임 이벤트 시작 */
 function move_start() {
     is_move = true;
     keyboardzone.classList.add("selected");
 }
 
-/* 키보드 움직임 이벤트 종료 */
 function move_stop() {
     is_move = false;
     keyboardzone.classList.remove("selected");
 }
 
-/* 키보드 움직임 이벤트 등록 */
-keyboard_move.addEventListener("mousedown", move_start)
+keyboard_move.addEventListener("mousedown", move_start);
 keyboard_move.addEventListener("mouseup", move_stop);
-keyboard_move.addEventListener("touchstart", move_start)
+keyboard_move.addEventListener("touchstart", move_start);
 keyboard_move.addEventListener("touchend", move_stop);
 
-/* 마우스 지원 */
-document.addEventListener("mousemove", (e) => {
-    pageX = Math.abs(e.pageX) - 225;
-    pageY = Math.abs(e.pageY) - 320;
+function handleMove(e) {
+    if (!is_move) return;
     
-    if (is_move) {
-        keyboardzone.style.left = `${pageX}px`;
-        keyboardzone.style.top = `${pageY}px`;
+    if (e.type === "mousemove") {
+        pageX = Math.abs(e.pageX) - 225;
+        pageY = Math.abs(e.pageY) - 320;
+    } else if (e.type === "touchmove") {
+        pageX = e.changedTouches[0].pageX - 225;
+        pageY = e.changedTouches[0].pageY - 225;
     }
-})
+    
+    keyboardzone.style.left = `${pageX}px`;
+    keyboardzone.style.top = `${pageY}px`;
+}
 
-/* 터치 지원 */
-document.addEventListener("touchmove", (e) => {
-    pageX = e.changedTouches[0].pageX - 225;
-    pageY = e.changedTouches[0].pageY - 225;
-
-    if (is_move) {
-        keyboardzone.style.left = `${pageX}px`;
-        keyboardzone.style.top = `${pageY}px`;
-    }
-})
+document.addEventListener("mousemove", handleMove);
+document.addEventListener("touchmove", handleMove);
