@@ -47,5 +47,29 @@ function handleMove(e) {
     keyboardzone.style.top = `${pageY}px`;
 }
 
+function keyboard_open() {
+    keyboardzone.classList.remove("hidden");
+
+    setTimeout(() => {
+        keyboardzone.classList.remove("close-animation");
+    }, 1);
+
+    setTimeout(() => {
+        keyboardzone.classList.remove("keyboard-close-animation");
+    }, 250);
+}
+
+function keyboard_close() {
+    keyboardzone.classList.add("keyboard-close-animation");
+
+    setTimeout(() => {
+        keyboardzone.classList.add("close-animation");
+    }, 1);
+
+    setTimeout(() => {
+        keyboardzone.classList.add("hidden");
+    }, 250);
+}
+
 document.addEventListener("mousemove", handleMove);
 document.addEventListener("touchmove", handleMove);

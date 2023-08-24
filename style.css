@@ -120,3 +120,30 @@ keyboard-movebar {
     opacity: 0.75;
     transform: scale(110%);
 }
+
+keyboard-close {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url(./res/button.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    margin-right: 36px;
+    margin-bottom: 16px;
+    right: 0;
+    bottom: 0;
+}
+
+.keyboard-close-animation {
+    transition: 0.25s ease-in;
+}
+
+.close-animation {
+    transform: scale(50%) translateY(100%);
+    opacity: 0.0;
+}
+
+.hidden {
+    display: none;
+}
