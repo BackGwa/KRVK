@@ -1,0 +1,108 @@
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css");
+
+:root {
+    --keyboard-background: #e8eaed;
+    --keyboard-drop-shadow: #00000070;
+
+    --keyboard-key-color: #ffffff;
+    --keyboard-key-function-color: #ccced5;
+    --keyboard-key-highlight-color: #1a73e8;
+    --keyboard-key-drop-shadow: #0000002A;
+}
+
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+keyboard-layout {
+    width : calc(100% - 8px);
+    height: calc(100% - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#keyboardzone {
+    position: absolute;
+    width: 550px;
+    height: 320px;
+    padding: 18px 4px 18px 4px;
+    background: var(--keyboard-background);
+    filter: drop-shadow(6px 6px 36px var(--keyboard-drop-shadow));
+    border-radius: 24px;
+
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+table {
+    width: 100%;
+    height: 57px;
+    display: flex;
+    justify-content: center;
+}
+
+th {
+    width: 42px;
+    background: var(--keyboard-key-color);
+    filter: drop-shadow(1px 1px 2px var(--keyboard-key-drop-shadow));
+    border-radius: 12px;
+    font-size: 1.6rem;
+    margin: 0 3px 0 3px;
+}
+
+keyboard-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.highlight,
+.function {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.highlight {
+    width: 65px;
+    background: var(--keyboard-key-highlight-color);
+    color: #ffffffe7;
+}
+
+.function {
+    width: 65px;
+    background: var(--keyboard-key-function-color);
+    color: #2b2a2be2;
+}
+
+.spacebar {
+    width: 365px;
+}
+
+keyboard-move {
+    position: absolute;
+    width: 100%;
+    height: 52px;
+    bottom: 0;
+}
+
+keyboard-movebar {
+    position: absolute;
+    background: #2b2a2b30;
+    width: 10%;
+    height: 8px;
+    border-radius: 8px;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.selected {
+    opacity: 0.75;
+    transform: scale(110%);
+}
