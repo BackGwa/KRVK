@@ -5,9 +5,9 @@
     --keyboard-background: #e8eaed;
     --keyboard-drop-shadow: #00000070;
 
-    --keyboard-key: #ffffff;
-    --keyboard-key-function: #ccced5;
-    --keyboard-key-highlight: #1a73e8;
+    --keyboard-key: linear-gradient(0.3turn, #ffffff, #f5f5f5);
+    --keyboard-key-function: linear-gradient(0.3turn, #ccced5, #c8c9cf);
+    --keyboard-key-highlight: linear-gradient(0.3turn, #1a73e8, #589bf4);
     --keyboard-key-drop-shadow: #0000002A;
 
     --keyboard-text-hightlight: #ffffffe7;
@@ -140,7 +140,7 @@ keyboard-close {
 }
 
 .close-animation {
-    transform: scale(50%) translateY(100%);
+    transform: scale(25%) translateY(200%);
     opacity: 0.0;
 }
 
