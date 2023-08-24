@@ -71,27 +71,17 @@ function customKeyboard(zone, input, onClick, onESC, onEnter, form) {
             var keyline = document.createElement("table");
             for (let j = 0; j < form[Object.keys(form)[index]][i].length; j++) {
                 var key = document.createElement("th")
+                const keySymbol = form[Object.keys(form)[index]][i][j];
 
-                if (form[Object.keys(form)[index]][i][j] == "↩") {
+                if (keySymbol === "↩") {
                     key.classList.add("highlight");
-                }
-
-                if (form[Object.keys(form)[index]][i][j] == "⌫" ||
-                    form[Object.keys(form)[index]][i][j] == "⮸") {
+                } else if (keySymbol === "⌫" || keySymbol === "⮸") {
                     key.classList.add("function");
-                }
-
-                if (form[Object.keys(form)[index]][i][j] == "") {
+                } else if (keySymbol === "") {
                     key.classList.add("spacebar");
-                }
-
-                if (form[Object.keys(form)[index]][i][j] == "." ||
-                    form[Object.keys(form)[index]][i][j] == "," ||
-                    form[Object.keys(form)[index]][i][j] == "?" ||
-                    form[Object.keys(form)[index]][i][j] == "!" ||
-                    form[Object.keys(form)[index]][i][j] == "'") {
+                } else if ([".", ",", "?", "!", "'"].includes(keySymbol)) {
                     key.classList.add("long-width");
-                }
+                }                
 
                 key.innerHTML = "<keyboard-text>" + form[Object.keys(form)[index]][i][j] + "</keyboard-text>";
                 key.addEventListener("click", keyfun)
