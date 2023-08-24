@@ -5,10 +5,15 @@
     --keyboard-background: #e8eaed;
     --keyboard-drop-shadow: #00000070;
 
-    --keyboard-key-color: #ffffff;
-    --keyboard-key-function-color: #ccced5;
-    --keyboard-key-highlight-color: #1a73e8;
+    --keyboard-key: #ffffff;
+    --keyboard-key-function: #ccced5;
+    --keyboard-key-highlight: #1a73e8;
     --keyboard-key-drop-shadow: #0000002A;
+
+    --keyboard-text-hightlight: #ffffffe7;
+    --keyboard-text-function: #2b2a2be2;
+
+    --movebar-color: #2b2a2b30;
 }
 
 body {
@@ -47,7 +52,7 @@ table {
 
 th {
     width: 42px;
-    background: var(--keyboard-key-color);
+    background: var(--keyboard-key);
     filter: drop-shadow(1px 1px 2px var(--keyboard-key-drop-shadow));
     border-radius: 12px;
     font-size: 1.6rem;
@@ -69,14 +74,14 @@ keyboard-text {
 
 .highlight {
     width: 65px;
-    background: var(--keyboard-key-highlight-color);
-    color: #ffffffe7;
+    background: var(--keyboard-key-highlight);
+    color: var(--keyboard-text-hightlight);
 }
 
 .function {
     width: 65px;
-    background: var(--keyboard-key-function-color);
-    color: #2b2a2be2;
+    background: var(--keyboard-key-function);
+    color: var(--keyboard-text-function);
 }
 
 .spacebar {
@@ -96,7 +101,7 @@ keyboard-move {
 
 keyboard-movebar {
     position: absolute;
-    background: #2b2a2b30;
+    background: var(--movebar-color);
     width: 10%;
     height: 8px;
     border-radius: 8px;
