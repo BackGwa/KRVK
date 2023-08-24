@@ -66,6 +66,11 @@ keyboard-text {
     transform: translate(-50%, -50%);
 }
 
+.disable {
+    position: absolute;
+    visibility: hidden;
+}
+
 .highlight,
 .function {
     font-size: 1.8rem;

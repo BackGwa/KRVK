@@ -1,5 +1,7 @@
 function customKeyboard(zone, input, onClick, onESC, onEnter, form) {
-    var nowlang = "koNormal";
+    let nowlang = "koNormal";
+    let charlist = [];
+
     this.setClick = function(newclick) {
         onClick = newclick;
     }
@@ -9,16 +11,17 @@ function customKeyboard(zone, input, onClick, onESC, onEnter, form) {
     this.setZone = function(newZone) {
         zone = newZone;
     };
-    var charlist = [];
+    
     this.setInput = function(inputtag) {
         input = inputtag;
-        var sub = Hangul.disassemble("" + input.value);
-        charlist = sub;
-    }
+        charlist = Hangul.disassemble("" + input.value);
+    };
+
     function getText() {
         return Hangul.assemble(charlist);
     }
-    if(form == null) {
+
+    if(!form) {
         form = {
             koNormal : [
                 ['ㅂ', 'ㅈ', 'ㄷ', 'ㄱ', 'ㅅ', 'ㅛ', 'ㅕ', 'ㅑ', 'ㅐ', 'ㅔ'],
@@ -58,14 +61,11 @@ function customKeyboard(zone, input, onClick, onESC, onEnter, form) {
             ]
         }
     }
-    var keydiv = {};
+
+    let keydiv = {};
     for (let index = 0; index < Object.keys(form).length; index++) {
         keydiv[Object.keys(form)[index]] = document.createElement("keyboard-layout")
-        keydiv[Object.keys(form)[index]].style.cssText = `
-            position: absolute;
-            align : center;
-            visibility: hidden;
-        `
+        keydiv[Object.keys(form)[index]].classList.add("disable");
 
         for (let i = 0; i < form[Object.keys(form)[index]].length; i++) {
             var keyline = document.createElement("table");
@@ -89,10 +89,8 @@ function customKeyboard(zone, input, onClick, onESC, onEnter, form) {
             }
             keydiv[Object.keys(form)[index]].appendChild(keyline);
         }
-
         zone.appendChild(keydiv[Object.keys(form)[index]])
     }
-
     keydiv[nowlang].style.visibility = "visible";
     function keyfun() {
         if(this.innerText == '↩') {
@@ -149,14 +147,11 @@ function customKeyboard(zone, input, onClick, onESC, onEnter, form) {
             }
             keydiv[nowlang].style.visibility = "visible";
             return
-        }
-        else if(this.innerText == '⌫') {
-            charlist.splice(charlist.length - 1, 1);
-        }
-        else if(this.innerText == '') {
+        } else if (this.innerText === "⌫") {
+            charlist.pop();
+        } else if (this.innerText === "") {
             charlist.push(" ");
-        }
-        else {
+        } else {
             charlist.push(this.innerText);
         }
         
